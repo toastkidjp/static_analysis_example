@@ -1,0 +1,16 @@
+bin/
+.eclipse
+/logs/
+*.eml
+/dist/
+.class
+.jar
+.git/
+.project
+.classpath
+.gradle/
+gradle/
+.settings/
+build/
+gradlew
+gradlew.bat

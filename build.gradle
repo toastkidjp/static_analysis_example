@@ -1,0 +1,50 @@
+apply plugin: 'application'
+apply plugin: 'checkstyle'
+apply plugin: 'jdepend'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+apply plugin: "jacoco"
+apply plugin: 'project-report'
+apply plugin: "com.github.hierynomus.license"
+
+sourceCompatibility = 1.8
+mainClassName       = "jp.toastkid.ratpack.Main"
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
+repositories {
+  mavenCentral()
+}
+
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.13.1"
+  }
+}
+
+dependencies {
+  compile 'io.ratpack:ratpack-core:1.4.1'
+  compile 'org.codehaus.groovy:groovy-all:2.4.5'
+  testCompile 'junit:junit:4.12'
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class'   : mainClassName
+  }
+  destinationDir = projectDir
+  from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+pmd {
+  ignoreFailures = true
+  ruleSets = [
+    'java-braces',
+    'java-codesize'
+  ]
+}
