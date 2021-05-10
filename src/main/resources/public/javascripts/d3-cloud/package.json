@@ -20,7 +20,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "canvas": "1.1.x"
+    "canvas": "1.6.11"
   },
   "devDependencies": {
     "uglify-js": "1.2.x"
